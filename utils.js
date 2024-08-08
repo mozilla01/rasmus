@@ -16,6 +16,7 @@ export function VerifyDiscordRequest(clientKey) {
 }
 
 export async function DiscordRequest(endpoint, options) {
+console.log('token '+process.env.DISCORD_TOKEN);
   // append endpoint to root API URL
   const url = "https://discord.com/api/v10/" + endpoint;
   // Stringify payloads
