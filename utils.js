@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import { verifyKey } from "discord-interactions";
 
 export function VerifyDiscordRequest(clientKey) {
-  return function (req, res, buf, encoding) {
+  return function(req, res, buf, encoding) {
     const signature = req.get("X-Signature-Ed25519");
     const timestamp = req.get("X-Signature-Timestamp");
 
@@ -16,7 +16,6 @@ export function VerifyDiscordRequest(clientKey) {
 }
 
 export async function DiscordRequest(endpoint, options) {
-console.log('token '+process.env.DISCORD_TOKEN);
   // append endpoint to root API URL
   const url = "https://discord.com/api/v10/" + endpoint;
   // Stringify payloads
