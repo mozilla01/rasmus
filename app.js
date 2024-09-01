@@ -8,6 +8,7 @@ import {
 } from "./utils.js";
 import Together from "together-ai";
 import { PrismaClient } from "@prisma/client";
+import { sleep } from "./utils.js";
 
 const together = new Together({ apiKey: process.env.TOGETHER_API_KEY });
 const prisma = new PrismaClient();
@@ -130,7 +131,7 @@ app.post("/interactions", async function (req, res) {
         console.log("Sending chronicle to server");
         let prevInd = 0,
           nextInd = 1900;
-        let interval = setInterval(async () => {
+        while (chronicle.slice(prevInd, nextInd)) {
           response = await DiscordRequest(`channels/${channel_id}/messages`, {
             method: "POST",
             body: {
@@ -139,12 +140,13 @@ app.post("/interactions", async function (req, res) {
           });
           prevInd = nextInd;
           nextInd = nextInd + 1900;
-          if (!chronicle.slice(prevInd, nextInd)) clearInterval(interval);
           data = await response.json();
+          console.log(`Message ID -> ${data.id}`);
           newLastMessageId = data.id;
           console.log(`Sent message -> ${JSON.stringify(data)}`);
-        }, 3000);
-        console.log("Last message ID: " + data.id + "->" + newLastMessageId);
+          sleep(3000);
+        }
+        console.log("Updating channel with last message id", newLastMessageId);
         await prisma.channel.upsert({
           where: {
             id: channel_id,

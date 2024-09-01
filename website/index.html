@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: #121212; /* Dark background */
+            color: #e0e0e0; /* Light gray text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background: #1e1e1e; /* Slightly lighter dark background */
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Darker shadow */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            margin: 0;
+            padding: 0;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .button {
+            display: inline-block;
+		margin: 10px 0;
+            padding: 15px 25px;
+            font-size: 1.2em;
+            color: #ffffff;
+            background-color: #4caf50; /* Dark green button */
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s ease, background-color 0.4s ease;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0); /* Initial shadow */
+        }
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 0;
+        }
+        .button span {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://via.placeholder.com/500x300" alt="Discord Bot Image">
+        <h1>Awesome Discord Bot</h1>
+        <p>This bot will revolutionize your server with amazing features and integrations. It is easy to set up and customize, bringing you the best of automation and fun.</p>
+        <a href="https://discord.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&scope=bot" class="button" id="glowButton" target="_blank"><span>Add to Discord</span></a>
+    </div>
+    <script>
+        const button = document.getElementById('glowButton');
+
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const offsetX = (x - centerX) / centerX;
+            const offsetY = (y - centerY) / centerY;
+            const radius = Math.sqrt(offsetX ** 2 + offsetY ** 2) * 20;
+
+            button.style.boxShadow = `0 0 ${radius}px rgba(255, 255, 255, 0.6)`;
+        });
+
+        button.addEventListener('mouseleave', () => {
+            button.style.boxShadow = `0 0 15px rgba(255, 255, 255, 0)`;
+        });
+    </script>
+</body>
+</html>
