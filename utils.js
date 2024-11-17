@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import { verifyKey } from "discord-interactions";
 
 export function VerifyDiscordRequest(clientKey) {
-  return function(req, res, buf, encoding) {
+  return function (req, res, buf, encoding) {
     const signature = req.get("X-Signature-Ed25519");
     const timestamp = req.get("X-Signature-Timestamp");
 
@@ -24,7 +24,7 @@ export async function DiscordRequest(endpoint, options) {
   const res = await fetch(url, {
     headers: {
       Authorization: `Bot ${process.env.DISCORD_TOKEN}`,
-      "Content-Type": "application/json; charset=UTF-8",
+      "Content-Type": "application/json",
       "User-Agent":
         "DiscordBot (https://github.com/discord/discord-example-app, 1.0.0)",
     },
@@ -78,5 +78,5 @@ export function capitalize(str) {
 }
 
 export function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
