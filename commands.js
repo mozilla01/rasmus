@@ -45,6 +45,20 @@ const WRITE_COMMAND = {
   name: "write",
   description: "Rasmus will write to the best of his abilities",
   type: 1,
+  options: [
+    {
+      type: 3,
+      name: "prompt",
+      description: "Custom prompt for Rasmus",
+      required: false,
+    },
+    {
+      type: 3,
+      name: "messages",
+      description: "Number of messages to read",
+      required: false,
+    },
+  ],
 };
 
 // About server command
@@ -71,7 +85,8 @@ const ABOUT_COMMAND = {
 // Generate image command
 const GENERATE_COMMAND = {
   name: "generate",
-  description: "Generate an image from a prompt. Command is available until 4th Jan, 2025.",
+  description:
+    "Generate an image from a prompt. Command is available until 4th Jan, 2025.",
   type: 1,
   options: [
     {
@@ -79,10 +94,15 @@ const GENERATE_COMMAND = {
       name: "prompt",
       description: "A descriptive prompt of the image",
       required: true,
-    }
+    },
   ],
 };
 
-const ALL_COMMANDS = [WRITE_COMMAND, TEST_COMMAND, ABOUT_COMMAND, GENERATE_COMMAND];
+const ALL_COMMANDS = [
+  WRITE_COMMAND,
+  TEST_COMMAND,
+  ABOUT_COMMAND,
+  GENERATE_COMMAND,
+];
 
 InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);
